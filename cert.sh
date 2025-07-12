@@ -11,5 +11,7 @@ if [ -z "$1" ]; then
 		fi
 	done
 else
-	certbot certonly --manual --preferred-challenges=dns -d $1
+	certbot certonly --manual --preferred-challenges=dns -d $1 && \
+	rm -rf /etc/letsencrypt/live/${1} && \
+	mv /etc/letsencrypt/live/${1}-* /etc/letsencrypt/live/${1}
 fi
